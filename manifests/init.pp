@@ -105,7 +105,7 @@ class graphlab {
             ensure  => installed,
         }
 
-        $tools = [ "make", "gcc", "g++" ] 
+        $tools = [ "make", "gcc", "g++", "zlib1g-dev" ] 
         package { $tools:
             ensure => installed,
         }
