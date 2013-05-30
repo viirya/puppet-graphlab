@@ -105,7 +105,7 @@ class graphlab {
             ensure  => installed,
         }
 
-        $tools = [ "make", "gcc", "g++", "zlib1g-dev" ] 
+        $tools = [ "make", "gcc", "g++", "zlib1g-dev", "libevent-pthreads-2.0-5" ] 
         package { $tools:
             ensure => installed,
         }
