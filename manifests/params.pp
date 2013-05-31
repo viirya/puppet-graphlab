@@ -2,6 +2,8 @@
 
 class graphlab::params {
 
+    include java::params
+
 	$version = $::hostname ? {
 		default			=> "v2.1.4679",
 	}
@@ -56,7 +58,11 @@ class graphlab::params {
         } 
 
         $graphlab_user_path = $::hostname ? {
-		default			=> "/home/${graphlab_user}",
-	}             
+		    default			=> "/home/${graphlab_user}",
+	    }             
+
+        $java_home = $::hostname ? {
+            default         => "${java::params::java_base}/jdk${java::params::java_version}",
+        }
 
 }
