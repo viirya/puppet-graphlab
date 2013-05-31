@@ -51,6 +51,10 @@ class graphlab::params {
             ubuntu => openmpi-doc,
         } 
 
+        $tools = $operatingsystem ? {
+            ubuntu => [ "make", "gcc", "g++", "zlib1g-dev", "libevent-pthreads-2.0-5" ],
+        } 
+
         $graphlab_user_path = $::hostname ? {
 		default			=> "/home/${graphlab_user}",
 	}             

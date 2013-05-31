@@ -1,5 +1,5 @@
 name    'viirya-graphlab'
-version '0.0.3'
+version '0.0.4'
 author 'Liang-Chi Hsieh'
 summary 'Deploy OpenMPI cluster and setup Graphlab'
 description "This module is used to setup an OpenMPI cluster and install Graphlab."

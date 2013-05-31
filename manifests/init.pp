@@ -37,13 +37,6 @@ class graphlab {
 		require => [ User["${graphlab::params::graphlab_user}"], Group["graphlab"] ]
 	}
 
-        file { "${graphlab::params::graphlab_user_path}/graphlab":
-                ensure => "directory",
-                owner => "${graphlab::params::graphlab_user}",
-                group => "${graphlab::params::graphlab_group}",
-                require => [ User["${graphlab::params::graphlab_user}"], Group["graphlab"], File["${graphlab::params::graphlab_user_path}"] ]
-        }
- 
 	file { "${graphlab::params::graphlab_base_path}":
 		ensure => "directory",
 		owner => "${graphlab::params::graphlab_user}",
@@ -105,8 +98,7 @@ class graphlab {
             ensure  => installed,
         }
 
-        $tools = [ "make", "gcc", "g++", "zlib1g-dev", "libevent-pthreads-2.0-5" ] 
-        package { $tools:
+        package { $graphlab::params::tools:
             ensure => installed,
         }
         

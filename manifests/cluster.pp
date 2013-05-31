@@ -31,6 +31,14 @@ class graphlab::cluster::master {
         require => Package["nfs_server_package"],
     }
 
+    file { "${graphlab::params::graphlab_user_path}/graphlab":
+        force => true,
+        ensure => "${graphlab::params::graphlab_base_path}",   
+        alias => "graphlab-symlink",
+        owner => "${graphlab::params::graphlab_user}",
+        group => "${graphlab::params::graphlab_group}",
+    }
+
 }
 
 class graphlab::cluster::slave {
@@ -43,12 +51,19 @@ class graphlab::cluster::slave {
         alias   => "nfs_client_package",
     }
 
+    file { "${graphlab::params::graphlab_user_path}/graphlab":
+        ensure => "directory",
+        owner => "${graphlab::params::graphlab_user}",
+        group => "${graphlab::params::graphlab_group}",
+        alias => "mount_point",
+    }
+
     mount { "${graphlab::params::graphlab_user_path}/graphlab": 
         device  => "${graphlab::params::master}:/graphlab", 
         fstype  => "nfs4", 
         ensure  => "mounted", 
         options => "_netdev,auto",
-	require => Package["nfs_client_package"],
+	require => [ Package["nfs_client_package"], File["mount_point"] ],
     } 
 
 }
